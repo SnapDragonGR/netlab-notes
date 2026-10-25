@@ -5,14 +5,15 @@ Done when: captured a TCP handshake, DNS lookup and ARP exchange, annotated.
 ## What I did
 ### OSI Model & TCP / IP model  
 
-OSI: 7 layers		TCP/IP: 4 layers
-7 Application  		4 Application
-6 Presentation  	3 Transport
-5 Session  		2 Internet
-4 Transport  		1 Link
-3 Network  
-2 Data Link  
-1 Physical  
+| OSI | TCP/IP |
+|---|---|
+| 7 Application | 4 Application |
+| 6 Presentation | 4 Application |
+| 5 Session | 4 Application |
+| 4 Transport | 3 Transport |
+| 3 Network | 2 Internet |
+| 2 Data Link | 1 Link |
+| 1 Physical | 1 Link |
 
 Conceptual model made by ISO to standardazie the different functions in a network.  
 Layer Summary:  

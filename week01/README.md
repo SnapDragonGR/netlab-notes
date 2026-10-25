@@ -38,12 +38,15 @@ Actually used in modern networks. OSI is still important.
 
   
 Encapsulation:  
+### Encapsulation
 
-Data is prepared in the Application Layer - 7, 6, 5
-L4 header added at the Transport Layer - 4: Data, L4 header. Result (PDU): Segment
-L3 header added at the Network Layer - 3: Data, L4 header, L3 header. Result: Packet
-L2 trailer + L2 header added at the Data Link Layer - 2: L2 header, L3 header, L4 header, Data, L2 trailer. Result: Frame
-At Layer 1 Physical, the frame is sent over a cable. PDU: Bit
+1. **Application (7, 6, 5):** data is prepared
+2. **Transport (4):** add L4 header → **Segment**
+3. **Network (3):** add L3 header → **Packet**
+4. **Data Link (2):** add L2 header and L2 trailer → **Frame**
+5. **Physical (1):** the frame is sent over the cable as **Bits**
+
+Final frame layout: `L2 header | L3 header | L4 header | Data | L2 trailer`
 
 De-encapsulation:
 Same is encapsulation but reversed order - remove tailer and header as we go up the model.  

@@ -54,5 +54,28 @@ Get Data at the end - 7, 6, 5.
 
 ![Data Flow and Network Topology Diagram](data-flow.png)
 
+### First Packet Inspection - curl http://example.com
+![Frame and Ethernet Info](frame-ethernet.png)  
+Ethernet Source and Destination MACs can be seen under Ethernet II
+![IP Info](IP-protocol.png)  
+IP source and destination not shown here, protocol = TCP (6)
+![TCP-HTP info](TCP-HTP.png)  
+TCP: Source Port 56150, destination 80, FDASS flags, seq num = 1  
+HTTP: GET HTTP 1.1
+
+## TCP & UDP
+* A port is used to direct traffic to a specific application process. Socket is the combination of an IP address and a port number (192.168.1.10:80)
+* TCP creates a reliable logical connection before sending data. It does this thru a 3-way handshake:
+1. SYN: The client requests a connection
+2. SYN-ACK: The server acknowledges the request and sends its own connection request.
+3. ACK: The client acknowledges the server, and the connection is established.
+* Sequence Numbers and ACKs: TCP assigns sequential numbers to packets to ensure they are processed in the right order. When the receiver gets the data, it sends back an Acknowledgment (ACK) to confirm receipt.
+* UDP Difference: UDP is a connectionless protocol that provides "best-effort" delivery. It doesn't use handshakes or guarantee delivery. Much faster but unreliable compared to TCP.
+
+### TCP Handshake
+![TCP Handshake](tcp-handshake.png)
+Different flags (RST, FIN, DATA, ACK, SYN-ACK, SYN) are present.  
+Most importantly: ACK, SYN-ACK, SYN.
+
 ## What broke
 ...

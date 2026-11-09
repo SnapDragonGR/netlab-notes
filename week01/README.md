@@ -1,8 +1,9 @@
 # Week 1
 
-Done when: captured a TCP handshake, DNS lookup and ARP exchange, annotated.
+## What I did  
+  
+## OSI vs TCP + encapsulation    
 
-## What I did
 ### OSI Model & TCP / IP model  
 
 | OSI | TCP/IP |
@@ -49,6 +50,7 @@ Encapsulation:
 Final frame layout: `L2 header | L3 header | L4 header | Data | L2 trailer`
 
 De-encapsulation:
+
 Same is encapsulation but reversed order - remove tailer and header as we go up the model.  
 Get Data at the end - 7, 6, 5.
 
@@ -75,7 +77,34 @@ HTTP: GET HTTP 1.1
 ### TCP Handshake
 ![TCP Handshake](tcp-handshake.png)
 Different flags (RST, FIN, DATA, ACK, SYN-ACK, SYN) are present.  
-Most importantly: ACK, SYN-ACK, SYN.
+Most importantly: ACK, SYN-ACK, SYN.  
+
+## ARP and ICMP (`ping`, `traceroute`)
+
+ARP = address resolution protocol  
+Used to discover the Layer 2 address (MAC address) of a known Layer 3 address (ip address)
+
+`ip neigh`
+![My ARP table](ARP-table.png)  
+  
+`show arp` used in cisco os
+  
+`ping` tests reachability, measures RTT (round trip time)  
+2 messages: ICMP Echo Request and ICMP Echo Reply  
+
+mac addresses age - removed after 5 minutes if not used  
+  
+`clear mac address-table dynamic` (interface <interface> or address <address>)  
+
+Traceroute used to trace path from source to destination (to see if intended path is taken)  
+Can help identify the problems on the path  
+
+#### Summary
+* ARP is the Layer 2 - 3 Glue. If the MAC isn't in the local ARP cache (ip neigh), the host sends an **ARP Request** via broadcast (FF:FF:FF:FF:FF:FF). Only the host owning that IP replies with a unicast ARP reply with its MAC address (if subnet is different - ARPs for its **Default Gateway's MAC instead**)
+* ICMP Ping: ICMP Echo Request Type 8, Code 0 and ICMP Echo Reply Type 0, Code 0
+* ICMP Traceroute: maps each router hop in a path. Sends packets starting with TTL = 1. The 1st router decrements TTL to 0, drops the packet, and sends back an ICMP Time Exceeded (Type 11) message. The sender logs that router's IP, increments TTL = 2 to find the second router, and repeats until reaching the destination (which replies with Echo Reply or Port Unreachable, Type 3 Code 3). All other OS except Windows use UDP probes for this, windows uses ICMP.
 
 ## What broke
-...
+Nothing Yet!
+
+
